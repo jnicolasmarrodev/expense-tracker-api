@@ -1,0 +1,7 @@
+package com.nico.expensetracker.repository;
+
+import com.nico.expensetracker.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+}
