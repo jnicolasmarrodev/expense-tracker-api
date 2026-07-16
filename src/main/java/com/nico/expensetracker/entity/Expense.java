@@ -43,4 +43,21 @@ public class Expense {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public Expense(
+            BigDecimal amount,
+            String description,
+            LocalDate expenseDate,
+            ExpenseCategory category,
+            Currency currency,
+            User user
+    ) {
+        this.amount = amount;
+        this.description = description;
+        this.expenseDate = expenseDate;
+        this.category = category;
+        this.currency = currency;
+        this.user = user;
+        this.createdAt = LocalDateTime.now();
+    }
 }
