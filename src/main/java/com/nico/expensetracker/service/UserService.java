@@ -25,7 +25,7 @@ public class UserService {
         return UserMapper.toResponse(savedUser);
     }
 
-    public User findEntityById(Long id) {
+    public User findByIdOrThrow(Long id) {
 
         return userRepository.findById(id)
                 .orElseThrow(() ->

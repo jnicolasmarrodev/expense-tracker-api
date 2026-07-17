@@ -24,7 +24,7 @@ public class ExpenseService {
 
     public ExpenseResponseDTO create(ExpenseRequestDTO dto) {
 
-        User user = userService.findEntityById(dto.userId());
+        User user = userService.findByIdOrThrow(dto.userId());
 
         Expense expense = ExpenseMapper.toEntity(dto, user);
 
