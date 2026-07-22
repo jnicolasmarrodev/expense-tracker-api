@@ -3,9 +3,12 @@ package com.nico.expensetracker.service;
 import com.nico.expensetracker.dto.UserRequestDTO;
 import com.nico.expensetracker.dto.UserResponseDTO;
 import com.nico.expensetracker.entity.User;
+import com.nico.expensetracker.exception.UserNotFoundException;
 import com.nico.expensetracker.mapper.UserMapper;
 import com.nico.expensetracker.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -29,6 +32,21 @@ public class UserService {
 
         return userRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("User not found: " + id));
+                        new UserNotFoundException(id));
+    }
+
+    public List<UserResponseDTO> findAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(UserMapper::toResponse)
+                .toList();
+    }
+
+    public UserResponseDTO findById(Long id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+
+        return UserMapper.toResponse(user);
     }
 }
