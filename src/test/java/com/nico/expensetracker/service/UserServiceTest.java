@@ -5,6 +5,7 @@ import com.nico.expensetracker.dto.UserResponseDTO;
 import com.nico.expensetracker.entity.User;
 import com.nico.expensetracker.exception.EmailAlreadyExistsException;
 import com.nico.expensetracker.exception.UserNotFoundException;
+import com.nico.expensetracker.repository.ExpenseRepository;
 import com.nico.expensetracker.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +22,9 @@ class UserServiceTest {
     void shouldCreateUserSuccessfully() {
 
         UserRepository userRepository = mock(UserRepository.class);
+        ExpenseRepository expenseRepository = mock(ExpenseRepository.class);
 
-        UserService userService = new UserService(userRepository);
+        UserService userService = new UserService(userRepository, expenseRepository);
 
 
         UserRequestDTO request = new UserRequestDTO(
@@ -55,8 +57,9 @@ class UserServiceTest {
     void shouldThrowExceptionWhenEmailAlreadyExists() {
 
         UserRepository userRepository = mock(UserRepository.class);
+        ExpenseRepository expenseRepository = mock(ExpenseRepository.class);
 
-        UserService userService = new UserService(userRepository);
+        UserService userService = new UserService(userRepository, expenseRepository);
 
 
         UserRequestDTO request = new UserRequestDTO(
@@ -82,8 +85,9 @@ class UserServiceTest {
     void shouldReturnUserWhenUserExists() {
 
         UserRepository userRepository = mock(UserRepository.class);
+        ExpenseRepository expenseRepository = mock(ExpenseRepository.class);
 
-        UserService userService = new UserService(userRepository);
+        UserService userService = new UserService(userRepository, expenseRepository);
 
 
         User user = new User(
@@ -108,8 +112,9 @@ class UserServiceTest {
     void shouldThrowExceptionWhenUserDoesNotExist() {
 
         UserRepository userRepository = mock(UserRepository.class);
+        ExpenseRepository expenseRepository = mock(ExpenseRepository.class);
 
-        UserService userService = new UserService(userRepository);
+        UserService userService = new UserService(userRepository, expenseRepository);
 
 
         when(userRepository.findById(999L))
