@@ -36,4 +36,20 @@ public class UserController {
     public UserResponseDTO getUserById(@PathVariable Long id) {
         return userService.findById(id);
     }
+
+    @PutMapping("/{id}")
+    public UserResponseDTO updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody UserRequestDTO dto
+    ) {
+        return userService.update(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(
+            @PathVariable Long id
+    ) {
+        userService.delete(id);
+    }
 }

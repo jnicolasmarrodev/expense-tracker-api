@@ -1,5 +1,6 @@
 package com.nico.expensetracker.entity;
 
+import com.nico.expensetracker.dto.ExpenseUpdateRequestDTO;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -57,5 +58,16 @@ public class Expense {
         this.currency = currency;
         this.user = user;
         this.createdAt = LocalDateTime.now();
+    }
+
+    public void update(
+            ExpenseUpdateRequestDTO dto
+    ) {
+
+        this.description = dto.description();
+        this.amount = dto.amount();
+        this.currency = dto.currency();
+        this.category = dto.category();
+        this.expenseDate = dto.expenseDate();
     }
 }
